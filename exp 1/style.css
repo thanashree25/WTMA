@@ -1,0 +1,14 @@
+body {
+    font-family: Arial;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+h2 {
+    color: maroon;
+}
+
+a {
+    color: blue;
+    font-weight: bold;
+}
