@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Registration Form</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 480px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 0.3rem;
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 1.8rem;
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .field {
+            margin-bottom: 1.1rem;
+        }
+
+        label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 0.4rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 0.65rem 0.9rem;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.875rem;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+            background: #fafafa;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #4f7ef8;
+            background: #fff;
+        }
+
+        input::placeholder, textarea::placeholder {
+            color: #bbb;
+            font-size: 0.82rem;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: #4f7ef8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        button:hover { background: #3a6be0; }
+        button:active { transform: scale(0.99); }
+
+        @media (max-width: 460px) {
+            .row { grid-template-columns: 1fr; }
+            .card { padding: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Create Account</h2>
+    <p class="subtitle">Fill in the details below to register.</p>
+
+    <form name="regForm" onsubmit="return validateForm()">
+
+        <div class="row">
+            <div class="field">
+                <label>First Name</label>
+                <input type="text" name="fname" placeholder="Min. 6 characters">
+            </div>
+            <div class="field">
+                <label>Last Name</label>
+                <input type="text" name="lname" placeholder="Last name">
+            </div>
+        </div>
+
+        <div class="field">
+            <label>Email Address</label>
+            <input type="text" name="email" placeholder="you@example.com">
+        </div>
+
+        <div class="field">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Min. 6 characters">
+        </div>
+
+        <div class="field">
+            <label>Mobile Number</label>
+            <input type="text" name="mobile" placeholder="10-digit number">
+        </div>
+
+        <div class="field">
+            <label>Address</label>
+            <textarea name="address" placeholder="Enter your address..."></textarea>
+        </div>
+
+        <button type="submit">Register</button>
+
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let fname    = document.forms["regForm"]["fname"].value;
+        let lname    = document.forms["regForm"]["lname"].value;
+        let password = document.forms["regForm"]["password"].value;
+        let email    = document.forms["regForm"]["email"].value;
+        let mobile   = document.forms["regForm"]["mobile"].value;
+        let address  = document.forms["regForm"]["address"].value;
+
+        let namePattern = /^[A-Za-z]+$/;
+        if (!namePattern.test(fname) || fname.length < 6) {
+            alert("First Name must contain only alphabets and be at least 6 characters.");
+            return false;
+        }
+
+        if (password.length < 6) {
+            alert("Password must be at least 6 characters long.");
+            return false;
+        }
+
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            alert("Invalid Email Format.");
+            return false;
+        }
+
+        let mobilePattern = /^[0-9]{10}$/;
+        if (!mobilePattern.test(mobile)) {
+            alert("Mobile number must be exactly 10 digits.");
+            return false;
+        }
+
+        if (lname == "") {
+            alert("Last Name cannot be empty.");
+            return false;
+        }
+
+        if (address == "") {
+            alert("Address cannot be empty.");
+            return false;
+        }
+
+        alert("Form Submitted Successfully!");
+        return true;
+    }
+</script>
+
+</body>
+</html>
